@@ -25,6 +25,7 @@ Attention이 "그래서 실제로 숫자가 어떻게 움직이는지" 이해하
 |---|---|
 | `transformer_from_scratch.py` | Transformer 전체 구조 (Encoder, Decoder, Multi-Head Attention, Masking, Positional Encoding, FFN, Add & Norm) |
 | `train_demo.py` | 위 모델을 실제로 학습시켜, Loss가 줄어들고 다음 단어 예측이 맞아가는 과정을 확인하는 데모 |
+| `transformer_training.ipynb` | 같은 개념을 PyTorch(autograd, GPU)로 옮긴 GPT-style Decoder-only 모델. Colab에서 tiny-shakespeare 데이터로 실전 학습 |
 
 ---
 
@@ -138,6 +139,18 @@ Loss가 어떻게 변하는지로 기울기를 근사합니다. 원리는 analyt
 - 학습은 analytic backprop이 아닌 수치 미분으로 근사
 
 더 큰 데이터셋이나 실전 학습이 필요하다면 PyTorch로 이식하는 것을 권장합니다.
+
+---
+
+## PyTorch로 실전 학습해보기 (`transformer_training.ipynb`)
+
+위 NumPy 구현의 개념(Q/K/V, Masked Self-Attention, Add & Norm, FeedForward)을 그대로 PyTorch로 옮기고,
+Decoder만 사용하는 **GPT-style 모델**로 확장했습니다. tiny-shakespeare 텍스트를 글자 단위로 토큰화해서 학습시키며,
+수치 미분 대신 PyTorch의 **autograd**와 GPU 연산을 사용합니다.
+
+```
+Colab에서: 런타임 → 런타임 유형 변경 → GPU(T4) 선택 후, 셀을 순서대로 실행
+```
 
 ---
 
